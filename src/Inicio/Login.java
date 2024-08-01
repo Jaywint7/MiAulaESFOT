@@ -4,6 +4,10 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.*;
+
+import Admin.menuAdmin;
+import Estudi.menuEstudi;
+import Profe.menuProf;
 import org.mindrot.jbcrypt.BCrypt;
 
 public class Login extends JFrame {
@@ -130,10 +134,22 @@ public class Login extends JFrame {
             if (BCrypt.checkpw(pswd, contraAlma)) {
 
                 // Validar el tipo de usuario según la selección
-                if (tipoUsuario.equalsIgnoreCase(eleccion)) {
+                if (tipoUsuario.equals("Administrador")) {
                     JOptionPane.showMessageDialog(null, "CREDENCIALES CORRECTAS - " + tipoUsuario);
-                    // Realiza las acciones correspondientes para el usuario
-                } else {
+                    Admin.menuAdmin menuAd = new menuAdmin();
+                    menuAd.setVisible(true);
+                    dispose();
+                } else if (tipoUsuario.equals("Profesor")) {
+                    JOptionPane.showMessageDialog(null, "CREDENCIALES CORRECTAS - " + tipoUsuario);
+                    Profe.menuProf menuPr = new menuProf();
+                    menuPr.setVisible(true);
+                    dispose();
+                }else if (tipoUsuario.equals("Estudiante")) {
+                    JOptionPane.showMessageDialog(null, "CREDENCIALES CORRECTAS - " + tipoUsuario);
+                    Estudi.menuEstudi menuEst = new menuEstudi();
+                    menuEst.setVisible(true);
+                    dispose();
+                }else {
                     JOptionPane.showMessageDialog(null, "ERROR DE CREDENCIALES - Tipo de usuario incorrecto");
                 }
             } else {

@@ -4,18 +4,31 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ef9c0105-1888-43fe-a3f8-56f4a4cf8ef9" name="Changes" comment="upd5">
-      <change afterPath="$PROJECT_DIR$/src/Admin/menuAdmin.form" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Admin/menuAdmin.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Inicio/Main.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Inicio/ManejarHash.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Inicio/ResgistroLog.form" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Inicio/ResgistroLog.java" afterDir="false" />
+    <list default="true" id="ef9c0105-1888-43fe-a3f8-56f4a4cf8ef9" name="Changes" comment="upd6">
+      <change afterPath="$PROJECT_DIR$/src/Admin/GestionReservas.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Admin/GestionUsu.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Admin/Gestion_Aul_Lab.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Estudi/GestionReservas/GestionarReserva.form" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Estudi/GestionReservas/GestionarReserva.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Estudi/ReservaAula/ReservarAula.form" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Estudi/ReservaAula/ReservarAula.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Estudi/VerReserva.form" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Estudi/VerReserva.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Estudi/menuEstudi.form" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Estudi/menuEstudi.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Profe/menuProf.form" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Profe/menuProf.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MiAulaESFOT.iml" beforeDir="false" afterPath="$PROJECT_DIR$/MiAulaESFOT.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Login.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/Inicio/Login.form" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Login.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Inicio/Login.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Admin/GestionAula_Lab/GestionAula_Lab.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/Admin/Gestion_Aul_Lab.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Admin/GestionAula_Lab/GestionAula_Lab.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Admin/GestionReserva/GestionReserv.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/Admin/GestionReservas.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Admin/GestionReserva/GestionReserv.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Admin/GestionUsu/GestionUsu.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/Admin/GestionUsu.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Admin/GestionUsu/GestionUsu.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Admin/menuAdmin.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/Admin/menuAdmin.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Admin/menuAdmin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Admin/menuAdmin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Inicio/Login.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Inicio/Login.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Inicio/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Inicio/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,9 +76,11 @@
 }</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Usuario-PC\Desktop\MiAulaESFOT\src\Admin\Menu" />
+      <recent name="C:\Users\Usuario-PC\Desktop\MiAulaESFOT\src\Estudi\ReservaAula" />
+      <recent name="C:\Users\Usuario-PC\Desktop\MiAulaESFOT\src\Estudi\GestionReservas" />
       <recent name="C:\Users\Usuario-PC\Desktop\MiAulaESFOT\src\Inicio" />
       <recent name="C:\Users\Usuario-PC\Desktop\MiAulaESFOT\src\Profe\ReservAula_Lab" />
-      <recent name="C:\Users\Usuario-PC\Desktop\MiAulaESFOT\src\Admin\GestionUsu" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -125,7 +140,15 @@
       <option name="project" value="LOCAL" />
       <updated>1721879233098</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="upd6">
+      <option name="closed" value="true" />
+      <created>1722525836300</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1722525836304</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -133,6 +156,7 @@
     <MESSAGE value="upd2" />
     <MESSAGE value="upd3" />
     <MESSAGE value="upd5" />
-    <option name="LAST_COMMIT_MESSAGE" value="upd5" />
+    <MESSAGE value="upd6" />
+    <option name="LAST_COMMIT_MESSAGE" value="upd6" />
   </component>
 </project>

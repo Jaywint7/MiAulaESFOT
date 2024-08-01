@@ -1,18 +1,16 @@
 package Admin;
 import Inicio.Login;
-import com.sun.tools.javac.Main;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ComponentAdapter;
 
 public class menuAdmin extends JFrame{
     private JButton gestionDeUsuariosButton;
     private JButton gestionDeReservasButton;
     private JButton gestionDeAulasYButton;
-    private JButton button4;
+    private JButton gestionarAdministradoresButton;
     private JPanel JPanel_menuAdmin;
     private JButton flechabtn;
     private JLabel flechalbl;
@@ -29,6 +27,30 @@ public class menuAdmin extends JFrame{
             public void actionPerformed(ActionEvent e) {
                 Inicio.Login login = new Login();
                 login.setVisible(true);
+                dispose();
+            }
+        });
+        gestionDeUsuariosButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                GestionUsu gestion = new GestionUsu();
+                gestion.setVisible(true);
+                dispose();
+            }
+        });
+        gestionDeReservasButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                GestionReservas reservas = new GestionReservas();
+                reservas.setVisible(true);
+                dispose();
+            }
+        });
+        gestionDeAulasYButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Gestion_Aul_Lab aulLab = new Gestion_Aul_Lab();
+                aulLab.setVisible(true);
                 dispose();
             }
         });
