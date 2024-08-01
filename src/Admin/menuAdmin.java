@@ -13,15 +13,17 @@ public class menuAdmin extends JFrame{
     private JButton gestionarAdministradoresButton;
     private JPanel JPanel_menuAdmin;
     private JButton flechabtn;
+    private JButton button1;
     private JLabel flechalbl;
 
     public menuAdmin(){
         super("Menu Administrador");
-        setSize(600,400);
+        setSize(600,500);
         setLocationRelativeTo(null);
         setContentPane(JPanel_menuAdmin);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         flechaAtras();
+
         flechabtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -30,6 +32,7 @@ public class menuAdmin extends JFrame{
                 dispose();
             }
         });
+
         gestionDeUsuariosButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

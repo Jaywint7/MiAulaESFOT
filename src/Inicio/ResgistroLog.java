@@ -1,6 +1,7 @@
 package Inicio;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
@@ -19,10 +20,11 @@ public class ResgistroLog extends JFrame{
     private JTextField txtClaveProf;
     private JLabel lblclave;
     private JButton regresarButton;
+    private JButton button1;
 
     public ResgistroLog(){
         super("Bienvenida");
-        setSize(400,400);
+        setSize(600,500);
         setLocationRelativeTo(null);
         setContentPane(JPanel_reg);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -45,6 +47,11 @@ public class ResgistroLog extends JFrame{
                 }
             }
         });
+        regresarButton.setSize(20,20);
+        ImageIcon icon = new ImageIcon("img/flechaAtras.png");
+        Image img = icon.getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT);
+        regresarButton.setIcon(new ImageIcon(img));
+
         regresarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
