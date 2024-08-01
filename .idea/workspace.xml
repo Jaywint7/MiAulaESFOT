@@ -4,12 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ef9c0105-1888-43fe-a3f8-56f4a4cf8ef9" name="Changes" comment="upd3">
-      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+    <list default="true" id="ef9c0105-1888-43fe-a3f8-56f4a4cf8ef9" name="Changes" comment="upd5">
+      <change afterPath="$PROJECT_DIR$/src/Admin/menuAdmin.form" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Admin/menuAdmin.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Inicio/Main.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Inicio/ManejarHash.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Inicio/ResgistroLog.form" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Inicio/ResgistroLog.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Login.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/Login.form" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Login.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Login.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MiAulaESFOT.iml" beforeDir="false" afterPath="$PROJECT_DIR$/MiAulaESFOT.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Login.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/Inicio/Login.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Login.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Inicio/Login.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,21 +44,26 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.Main.executor": "Run",
-    "OverrideImplement.generate.javadoc": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.SHOW": "true",
-    "UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.WIDTH": "353",
-    "git-widget-placeholder": "master",
-    "kotlin-language-version-configured": "true",
-    "onboarding.tips.debug.path": "C:/Users/Usuario-PC/Desktop/MiAulaESFOT/src/Main.java",
-    "settings.editor.selected.configurable": "editor.preferences.completion"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
+    &quot;OverrideImplement.generate.javadoc&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.SHOW&quot;: &quot;true&quot;,
+    &quot;UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.WIDTH&quot;: &quot;353&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Usuario-PC/Downloads/jbcrypt-0.4.jar&quot;,
+    &quot;onboarding.tips.debug.path&quot;: &quot;C:/Users/Usuario-PC/Desktop/MiAulaESFOT/src/Main.java&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;editor.preferences.completion&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Usuario-PC\Desktop\MiAulaESFOT\src\Inicio" />
       <recent name="C:\Users\Usuario-PC\Desktop\MiAulaESFOT\src\Profe\ReservAula_Lab" />
       <recent name="C:\Users\Usuario-PC\Desktop\MiAulaESFOT\src\Admin\GestionUsu" />
     </key>
@@ -106,13 +117,22 @@
       <option name="project" value="LOCAL" />
       <updated>1721870238784</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="upd5">
+      <option name="closed" value="true" />
+      <created>1721879233098</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1721879233098</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="upd1" />
     <MESSAGE value="upd2" />
     <MESSAGE value="upd3" />
-    <option name="LAST_COMMIT_MESSAGE" value="upd3" />
+    <MESSAGE value="upd5" />
+    <option name="LAST_COMMIT_MESSAGE" value="upd5" />
   </component>
 </project>
