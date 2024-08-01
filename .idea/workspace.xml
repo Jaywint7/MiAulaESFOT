@@ -4,17 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ef9c0105-1888-43fe-a3f8-56f4a4cf8ef9" name="Changes" comment="upd7">
-      <change afterPath="$PROJECT_DIR$/src/Admin/ManejarHash.java" afterDir="false" />
+    <list default="true" id="ef9c0105-1888-43fe-a3f8-56f4a4cf8ef9" name="Changes" comment="upd8">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Admin/GestionUsu.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/Admin/GestionUsu.form" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Admin/GestionUsu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Admin/GestionUsu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Admin/menuAdmin.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/Admin/menuAdmin.form" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Admin/menuAdmin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Admin/menuAdmin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Inicio/Login.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/Inicio/Login.form" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Inicio/Login.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Inicio/Login.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Inicio/ResgistroLog.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/Inicio/ResgistroLog.form" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Inicio/ResgistroLog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Inicio/ResgistroLog.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -166,7 +159,15 @@
       <option name="project" value="LOCAL" />
       <updated>1722537351080</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="upd8">
+      <option name="closed" value="true" />
+      <created>1722549364128</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1722549364128</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -176,6 +177,7 @@
     <MESSAGE value="upd5" />
     <MESSAGE value="upd6" />
     <MESSAGE value="upd7" />
-    <option name="LAST_COMMIT_MESSAGE" value="upd7" />
+    <MESSAGE value="upd8" />
+    <option name="LAST_COMMIT_MESSAGE" value="upd8" />
   </component>
 </project>

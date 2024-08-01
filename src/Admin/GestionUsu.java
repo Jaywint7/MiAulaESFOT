@@ -4,6 +4,7 @@ import Inicio.ManejarHash;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.*;
@@ -34,12 +35,15 @@ public class GestionUsu extends JFrame {
     private JComboBox ComboAdd;
     private JTextField txtidDelete;
     private JButton regresarButton;
+    private JPanel JPanel_Add;
+    private JComboBox comboBox1;
+    private JScrollPane JScroll_tabla;
 
     public GestionUsu(){
         super("Gestion de Usuarios");
         setExtendedState(JFrame.MAXIMIZED_BOTH);
-        setContentPane(JPanel_GestionUsu);
         setLocationRelativeTo(null);
+        setContentPane(JPanel_GestionUsu);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         tablaGestUsu.setModel(new DefaultTableModel(
@@ -62,6 +66,7 @@ public class GestionUsu extends JFrame {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
         añadirUsuarioButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -72,6 +77,12 @@ public class GestionUsu extends JFrame {
                 }
             }
         });
+
+        regresarButton.setSize(20,20);
+        ImageIcon icon = new ImageIcon("img/flechaAtras.png");
+        Image img = icon.getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT);
+        regresarButton.setIcon(new ImageIcon(img));
+
         regresarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -80,6 +91,7 @@ public class GestionUsu extends JFrame {
                 dispose();
             }
         });
+
         completarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -90,6 +102,7 @@ public class GestionUsu extends JFrame {
                 }
             }
         });
+
         editarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -100,6 +113,7 @@ public class GestionUsu extends JFrame {
                 }
             }
         });
+
         eliminarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -248,7 +262,7 @@ public class GestionUsu extends JFrame {
             txtidEdit.setText("");
             ComboEdit.setSelectedItem(null);
         } else {
-            JOptionPane.showMessageDialog(null, "NO SE ENCONTRO NINGUN REGISTRO CON LA CEDULA PROPORCIONADA");
+            JOptionPane.showMessageDialog(null, "NO SE ENCONTRO NINGUN REGISTRO CON EL ID PROPORCIONADO");
         }
 
         st.close();
@@ -280,7 +294,7 @@ public class GestionUsu extends JFrame {
             // Habilitar el botón de actualización
             editarButton.setEnabled(true);
         } else {
-            JOptionPane.showMessageDialog(null, "No se encontró ningún registro con la cédula proporcionada");
+            JOptionPane.showMessageDialog(null, "NO SE ENCONTRO NINGUN REGISTRO CON EL ID PROPORCIONADO");
             // Deshabilitar el botón de actualización si no se encontraron datos
             editarButton.setEnabled(false);
         }
@@ -303,7 +317,7 @@ public class GestionUsu extends JFrame {
         if (rowsAffected > 0) {
             JOptionPane.showMessageDialog(null, "REGISTRO ELIMINADO CORRECTAMENTE");
         } else {
-            JOptionPane.showMessageDialog(null, "NO SE ENCONTRO NINGUN REGISTRO CON LA CEDULA PROPORCIONADA");
+            JOptionPane.showMessageDialog(null, "NO SE ENCONTRO NINGUN REGISTRO CON El ID PROPORCIONADO");
         }
 
         st.close();
