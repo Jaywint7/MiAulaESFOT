@@ -4,10 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ef9c0105-1888-43fe-a3f8-56f4a4cf8ef9" name="Changes" comment="upd8">
+    <list default="true" id="ef9c0105-1888-43fe-a3f8-56f4a4cf8ef9" name="Changes" comment="upd9">
+      <change afterPath="$PROJECT_DIR$/src/Admin/GestionAul_Lab.form" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Admin/GestionAul_Lab.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Admin/GestionUsu.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/Admin/GestionUsu.form" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Admin/GestionUsu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Admin/GestionUsu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Admin/Gestion_Aul_Lab.form" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Admin/Gestion_Aul_Lab.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Admin/menuAdmin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Admin/menuAdmin.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,8 +47,9 @@
     "OverrideImplement.generate.javadoc": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "UI_DESIGNER_EDITOR_MODE.PaletteManager.SHOW": "true",
+    "UI_DESIGNER_EDITOR_MODE.PaletteManager.WIDTH": "87",
     "UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.SHOW": "true",
-    "UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.WIDTH": "463",
+    "UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.WIDTH": "379",
     "git-widget-placeholder": "master",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/Usuario-PC/Downloads/jbcrypt-0.4.jar",
@@ -167,7 +173,15 @@
       <option name="project" value="LOCAL" />
       <updated>1722549364128</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="upd9">
+      <option name="closed" value="true" />
+      <created>1722551862162</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1722551862173</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -178,6 +192,7 @@
     <MESSAGE value="upd6" />
     <MESSAGE value="upd7" />
     <MESSAGE value="upd8" />
-    <option name="LAST_COMMIT_MESSAGE" value="upd8" />
+    <MESSAGE value="upd9" />
+    <option name="LAST_COMMIT_MESSAGE" value="upd9" />
   </component>
 </project>

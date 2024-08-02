@@ -36,7 +36,7 @@ public class GestionUsu extends JFrame {
     private JTextField txtidDelete;
     private JButton regresarButton;
     private JPanel JPanel_Add;
-    private JComboBox comboBox1;
+    private JComboBox ComboFiltrado;
     private JScrollPane JScroll_tabla;
 
     public GestionUsu(){
@@ -169,16 +169,45 @@ public class GestionUsu extends JFrame {
         Connection conectar = conexion();
         String sql;
         PreparedStatement st;
-        if (txtidSearch.getText().trim().isEmpty()) {
+
+        String filtro = txtidSearch.getText().trim();
+        String eleccion = (String) ComboFiltrado.getSelectedItem();
+
+        if (filtro.isEmpty()) {
             // Si está vacío, buscar todos los registros
             sql = "SELECT * FROM usuarios";
             st = conectar.prepareStatement(sql);
         } else {
-            // Si tiene un valor, buscar por id
-            int id = Integer.parseInt(txtidSearch.getText());
-            sql = "SELECT * FROM usuarios WHERE id = ?";
-            st = conectar.prepareStatement(sql);
-            st.setInt(1, id);
+            switch (eleccion) {
+                case "Id":
+                    sql = "SELECT * FROM usuarios WHERE id = ?";
+                    st = conectar.prepareStatement(sql);
+                    st.setInt(1, Integer.parseInt(filtro));
+                    break;
+                case "Nombre":
+                    sql = "SELECT * FROM usuarios WHERE nombre LIKE ?";
+                    st = conectar.prepareStatement(sql);
+                    st.setString(1, "%" + filtro + "%");
+                    break;
+                case "Apellido":
+                    sql = "SELECT * FROM usuarios WHERE apellido LIKE ?";
+                    st = conectar.prepareStatement(sql);
+                    st.setString(1, "%" + filtro + "%");
+                    break;
+                case "Email":
+                    sql = "SELECT * FROM usuarios WHERE email LIKE ?";
+                    st = conectar.prepareStatement(sql);
+                    st.setString(1, "%" + filtro + "%");
+                    break;
+                case "Tipo de Usuario":
+                    sql = "SELECT * FROM usuarios WHERE tipo_usuario LIKE ?";
+                    st = conectar.prepareStatement(sql);
+                    st.setString(1, "%" + filtro + "%");
+                    break;
+                default:
+                    JOptionPane.showMessageDialog(null, "Seleccion no válida");
+                    return;
+            }
         }
 
         ResultSet rs = st.executeQuery();

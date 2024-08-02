@@ -52,7 +52,7 @@ public class menuAdmin extends JFrame{
         gestionDeAulasYButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Gestion_Aul_Lab aulLab = new Gestion_Aul_Lab();
+                GestionAul_Lab aulLab = new GestionAul_Lab();
                 aulLab.setVisible(true);
                 dispose();
             }
