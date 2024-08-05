@@ -134,23 +134,28 @@ public class Login extends JFrame {
             if (BCrypt.checkpw(pswd, contraAlma)) {
 
                 // Validar el tipo de usuario según la selección
-                if (tipoUsuario.equals("Administrador")) {
-                    JOptionPane.showMessageDialog(null, "CREDENCIALES CORRECTAS - " + tipoUsuario);
-                    Admin.menuAdmin menuAd = new menuAdmin();
-                    menuAd.setVisible(true);
-                    dispose();
-                } else if (tipoUsuario.equals("Profesor")) {
-                    JOptionPane.showMessageDialog(null, "CREDENCIALES CORRECTAS - " + tipoUsuario);
-                    Profe.menuProf menuPr = new menuProf();
-                    menuPr.setVisible(true);
-                    dispose();
-                }else if (tipoUsuario.equals("Estudiante")) {
-                    JOptionPane.showMessageDialog(null, "CREDENCIALES CORRECTAS - " + tipoUsuario);
-                    Estudi.menuEstudi menuEst = new menuEstudi();
-                    menuEst.setVisible(true);
-                    dispose();
-                }else {
-                    JOptionPane.showMessageDialog(null, "ERROR DE CREDENCIALES - Tipo de usuario incorrecto");
+                switch (tipoUsuario) {
+                    case "Administrador":
+                        JOptionPane.showMessageDialog(null, "CREDENCIALES CORRECTAS - " + tipoUsuario);
+                        Admin.menuAdmin menuAd = new menuAdmin();
+                        menuAd.setVisible(true);
+                        dispose();
+                        break;
+                    case "Profesor":
+                        JOptionPane.showMessageDialog(null, "CREDENCIALES CORRECTAS - " + tipoUsuario);
+                        Profe.menuProf menuPr = new menuProf();
+                        menuPr.setVisible(true);
+                        dispose();
+                        break;
+                    case "Estudiante":
+                        JOptionPane.showMessageDialog(null, "CREDENCIALES CORRECTAS - " + tipoUsuario);
+                        Estudi.menuEstudi menuEst = new Estudi.menuEstudi();
+                        menuEst.setVisible(true);
+                        dispose();
+                        break;
+                    default:
+                        JOptionPane.showMessageDialog(null, "ERROR DE CREDENCIALES - Tipo de usuario incorrecto");
+                        break;
                 }
             } else {
                 JOptionPane.showMessageDialog(null, "CREDENCIALES INCORRECTAS - Contraseña");
