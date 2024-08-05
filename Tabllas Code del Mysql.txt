@@ -1,0 +1,26 @@
+create database usuarios;
+use usuarios;
+
+La tabla usuarios en la nube: CREATE TABLE bwhrnrxq2kqlsgfno7nj.usuarios (id INT NOT NULL AUTO_INCREMENT , nombre VARCHAR(50) NOT NULL , apellido VARCHAR(50) NOT NULL , email VARCHAR(100) NOT NULL , contraseña VARCHAR(100) NOT NULL , tipo_usuario ENUM('Administrador', 'Profesor', 'Estudiante') NOT NULL , PRIMARY KEY (id), UNIQUE (email)) ENGINE = InnoDB;
+
+create database miaulaesfot;
+use miaulaesfot;
+
+La tabla aulas_laboratorios localmente:  Id INT AUTO_INCREMENT PRIMARY KEY,
+    Tipo ENUM('Aula', 'Laboratorio') NOT NULL,
+    Nombre VARCHAR(100) NOT NULL,
+    Capacidad INT NOT NULL,
+    NumeroAulLab INT NOT NULL,
+    Carrera ENUM('Aguas y Saneamiento Ambiental', 'Desarrollo de Software', 'Electromenica' , 'Redes y Telecomunicaciones') NOT NULL,
+    Estado ENUM('Disponible', 'Ocupado', 'Mantenimiento') NOT NULL
+
+La tabla reservas localmente: CREATE TABLE reservas (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    aula_lab_id INT NOT NULL,
+    usuario_id INT NOT NULL,
+    fecha_reserva DATE NOT NULL,
+    hora_inicio TIME NOT NULL,
+    hora_fin TIME NOT NULL,
+    estado ENUM('Pendiente', 'Confirmada', 'Cancelada') NOT NULL,
+    FOREIGN KEY (aula_lab_id) REFERENCES aulas_laboratorios(Id)
+);
