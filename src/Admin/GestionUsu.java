@@ -9,8 +9,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.*;
 
-import static Admin.ManejarHash.hashPassword;
-
+/**
+ * Clase que gestiona la administración de usuarios.
+ */
 public class GestionUsu extends JFrame {
     private JPanel JPanel_GestionUsu;
     private JButton añadirUsuarioButton;
@@ -27,20 +28,24 @@ public class GestionUsu extends JFrame {
     private JTextField txtEmailEdit;
     private JPasswordField txtContraEdit;
     private JTextField txtidEdit;
-    private JComboBox ComboEdit;
+    private JComboBox<String> ComboEdit;
     private JTextField txtNomAdd;
     private JTextField txtApeAdd;
     private JTextField txtEmailAdd;
     private JPasswordField txtContAdd;
-    private JComboBox ComboAdd;
+    private JComboBox<String> ComboAdd;
     private JTextField txtidDelete;
     private JButton regresarButton;
     private JPanel JPanel_Add;
-    private JComboBox ComboFiltrado;
+    private JComboBox<String> ComboFiltrado;
     private JScrollPane JScroll_tabla;
 
-    public GestionUsu(){
-        super("Gestion de Usuarios");
+    /**
+     * Constructor de la clase GestionUsu.
+     * Configura la interfaz gráfica y añade los listeners a los botones.
+     */
+    public GestionUsu() {
+        super("Gestión de Usuarios");
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         setLocationRelativeTo(null);
         setContentPane(JPanel_GestionUsu);
@@ -61,6 +66,7 @@ public class GestionUsu extends JFrame {
                 }
             }
         });
+
         try {
             cargarRegistros();
         } catch (SQLException e) {
@@ -78,7 +84,7 @@ public class GestionUsu extends JFrame {
             }
         });
 
-        regresarButton.setSize(20,20);
+        regresarButton.setSize(20, 20);
         ImageIcon icon = new ImageIcon("img/flechaAtras.png");
         Image img = icon.getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT);
         regresarButton.setIcon(new ImageIcon(img));
@@ -126,6 +132,10 @@ public class GestionUsu extends JFrame {
         });
     }
 
+    /**
+     * Añade un nuevo usuario a la base de datos.
+     * @throws SQLException Si ocurre un error al acceder a la base de datos.
+     */
     public void añadir() throws SQLException {
         String nombre = txtNomAdd.getText().trim();
         String apellido = txtApeAdd.getText().trim();
@@ -142,29 +152,32 @@ public class GestionUsu extends JFrame {
         String ContraHash = ManejarHash.hashPassword(contraseña);
 
         Connection conectar = conexion();
-        String sql = "INSERT INTO usuarios(nombre, apellido, email, contraseña, tipo_usuario)value(?,?,?,?,?)";
+        String sql = "INSERT INTO usuarios(nombre, apellido, email, contraseña, tipo_usuario) VALUES (?, ?, ?, ?, ?)";
         PreparedStatement st = conectar.prepareStatement(sql);
-        st.setString(1,nombre);
-        st.setString(2,apellido);
-        st.setString(3,email);
-        st.setString(4,ContraHash);
-        st.setString(5,tipo_usuario);
+        st.setString(1, nombre);
+        st.setString(2, apellido);
+        st.setString(3, email);
+        st.setString(4, ContraHash);
+        st.setString(5, tipo_usuario);
 
-        int rowsAffected=st.executeUpdate();
-        if ( (rowsAffected > 0)) {
-            JOptionPane.showMessageDialog(null, "REGISTRO INSERTADO CORRECTAMENTE");
+        int rowsAffected = st.executeUpdate();
+        if (rowsAffected > 0) {
+            JOptionPane.showMessageDialog(null, "Registro insertado correctamente");
             txtNomAdd.setText("");
             txtApeAdd.setText("");
             txtEmailAdd.setText("");
             txtContAdd.setText("");
-        }else{
-            JOptionPane.showMessageDialog(null, "EROR EN EL REGISTRO");
+        } else {
+            JOptionPane.showMessageDialog(null, "Error en el registro");
         }
         st.close();
         conectar.close();
     }
 
-
+    /**
+     * Busca usuarios en la base de datos según el filtro proporcionado.
+     * @throws SQLException Si ocurre un error al acceder a la base de datos.
+     */
     public void buscar() throws SQLException {
         Connection conectar = conexion();
         String sql;
@@ -205,7 +218,7 @@ public class GestionUsu extends JFrame {
                     st.setString(1, "%" + filtro + "%");
                     break;
                 default:
-                    JOptionPane.showMessageDialog(null, "Seleccion no válida");
+                    JOptionPane.showMessageDialog(null, "Selección no válida");
                     return;
             }
         }
@@ -230,7 +243,11 @@ public class GestionUsu extends JFrame {
         conectar.close();
     }
 
-    public void cargarRegistros() throws SQLException{
+    /**
+     * Carga todos los registros de usuarios desde la base de datos.
+     * @throws SQLException Si ocurre un error al acceder a la base de datos.
+     */
+    public void cargarRegistros() throws SQLException {
         Connection conectar = conexion();
         String sql = "SELECT * FROM usuarios";
 
@@ -254,6 +271,10 @@ public class GestionUsu extends JFrame {
         conectar.close();
     }
 
+    /**
+     * Edita los datos de un usuario existente en la base de datos.
+     * @throws SQLException Si ocurre un error al acceder a la base de datos.
+     */
     public void editar() throws SQLException {
         String id = txtidEdit.getText();
         String nombre = txtNomEdit.getText().trim();
@@ -273,85 +294,95 @@ public class GestionUsu extends JFrame {
         Connection conectar = conexion();
         String sql = "UPDATE usuarios SET nombre = ?, apellido = ?, email = ?, contraseña = ?, tipo_usuario = ? WHERE id = ?";
         PreparedStatement st = conectar.prepareStatement(sql);
-
         st.setString(1, nombre);
         st.setString(2, apellido);
         st.setString(3, email);
-        st.setString(4, hashPassword(contraseña)); // Hashing the password
+        st.setString(4, ContraHash);
         st.setString(5, tipo_usuario);
-        st.setString(6, id);
+        st.setInt(6, Integer.parseInt(id));
 
         int rowsAffected = st.executeUpdate();
         if (rowsAffected > 0) {
-            JOptionPane.showMessageDialog(null, "REGISTRO ACTUALIZADO CORRECTAMENTE");
+            JOptionPane.showMessageDialog(null, "Registro actualizado correctamente");
             txtNomEdit.setText("");
             txtApeEdit.setText("");
             txtEmailEdit.setText("");
             txtContraEdit.setText("");
             txtidEdit.setText("");
-            ComboEdit.setSelectedItem(null);
         } else {
-            JOptionPane.showMessageDialog(null, "NO SE ENCONTRO NINGUN REGISTRO CON EL ID PROPORCIONADO");
+            JOptionPane.showMessageDialog(null, "Error al actualizar el registro");
         }
-
         st.close();
         conectar.close();
     }
 
-    public void completar() throws SQLException {
-        String id = txtidEdit.getText();
+    /**
+     * Elimina un usuario de la base de datos.
+     * @throws SQLException Si ocurre un error al acceder a la base de datos.
+     */
+    public void eliminar() throws SQLException {
+        String id = txtidDelete.getText().trim();
+
+        // Validación de campo vacío
         if (id.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Ingrese el Id para buscar");
+            JOptionPane.showMessageDialog(null, "El campo ID es obligatorio.");
+            return;
+        }
+
+        Connection conectar = conexion();
+        String sql = "DELETE FROM usuarios WHERE id = ?";
+        PreparedStatement st = conectar.prepareStatement(sql);
+        st.setInt(1, Integer.parseInt(id));
+
+        int rowsAffected = st.executeUpdate();
+        if (rowsAffected > 0) {
+            JOptionPane.showMessageDialog(null, "Registro eliminado correctamente");
+            txtidDelete.setText("");
+        } else {
+            JOptionPane.showMessageDialog(null, "Error al eliminar el registro");
+        }
+        st.close();
+        conectar.close();
+    }
+
+    /**
+     * Completa los campos de edición con los datos de un usuario buscado.
+     * @throws SQLException Si ocurre un error al acceder a la base de datos.
+     */
+    public void completar() throws SQLException {
+        String id = txtidEdit.getText().trim();
+
+        // Validación de campo vacío
+        if (id.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "El campo ID es obligatorio.");
             return;
         }
 
         Connection conectar = conexion();
         String sql = "SELECT * FROM usuarios WHERE id = ?";
         PreparedStatement st = conectar.prepareStatement(sql);
-        st.setString(1, id);
-        ResultSet rs = st.executeQuery();
+        st.setInt(1, Integer.parseInt(id));
 
+        ResultSet rs = st.executeQuery();
         if (rs.next()) {
-            // Llenar los campos de texto con los datos obtenidos
             txtNomEdit.setText(rs.getString("nombre"));
             txtApeEdit.setText(rs.getString("apellido"));
             txtEmailEdit.setText(rs.getString("email"));
             txtContraEdit.setText(rs.getString("contraseña"));
-            String tipoUsuario = rs.getString("tipo_usuario");
-            ComboEdit.setSelectedItem(tipoUsuario);
-
-            // Habilitar el botón de actualización
-            editarButton.setEnabled(true);
+            ComboEdit.setSelectedItem(rs.getString("tipo_usuario"));
         } else {
-            JOptionPane.showMessageDialog(null, "NO SE ENCONTRO NINGUN REGISTRO CON EL ID PROPORCIONADO");
-            // Deshabilitar el botón de actualización si no se encontraron datos
-            editarButton.setEnabled(false);
+            JOptionPane.showMessageDialog(null, "No se encontró un usuario con el ID especificado.");
         }
-
         rs.close();
         st.close();
         conectar.close();
     }
 
-    public void eliminar() throws SQLException {
-        String id = txtidDelete.getText();
-
-        Connection conectar = conexion();
-        String sql = "DELETE FROM usuarios WHERE id = ?";
-        PreparedStatement st = conectar.prepareStatement(sql);
-
-        st.setString(1, id);
-
-        int rowsAffected = st.executeUpdate();
-        if (rowsAffected > 0) {
-            JOptionPane.showMessageDialog(null, "REGISTRO ELIMINADO CORRECTAMENTE");
-        } else {
-            JOptionPane.showMessageDialog(null, "NO SE ENCONTRO NINGUN REGISTRO CON El ID PROPORCIONADO");
-        }
-
-        st.close();
-        conectar.close();
-    }
+    /**
+     * Establece la conexión con la base de datos MySQL.
+     * @return Conexión a la base de datos.
+     * @throws SQLException Si ocurre un error al conectar con la base de datos.
+     */
 
     public Connection conexion() throws SQLException {
         String url = "jdbc:mysql://bwhrnrxq2kqlsgfno7nj-mysql.services.clever-cloud.com:3306/bwhrnrxq2kqlsgfno7nj";

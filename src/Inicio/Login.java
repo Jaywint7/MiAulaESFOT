@@ -10,6 +10,15 @@ import Estudi.menuEstudi;
 import Profe.menuProf;
 import org.mindrot.jbcrypt.BCrypt;
 
+/**
+ * La clase `Login` representa la ventana de inicio de sesión de la aplicación.
+ * <p>
+ * Esta clase extiende {@link JFrame} y proporciona una interfaz gráfica para que los usuarios
+ * ingresen sus credenciales. Dependiendo del tipo de usuario seleccionado (Administrador, Profesor o Estudiante),
+ * se mostrarán diferentes paneles de entrada. También maneja el proceso de autenticación y la navegación
+ * hacia las ventanas correspondientes tras una autenticación exitosa.
+ * </p>
+ */
 public class Login extends JFrame {
     private JComboBox<String> comboUsu;
     private JTextField txtUsuLogAdmin;
@@ -25,6 +34,13 @@ public class Login extends JFrame {
     private JPanel JPanel_Est;
     private JButton registreseButton;
 
+    /**
+     * Constructor de la clase `Login`.
+     * <p>
+     * Configura la ventana principal de inicio de sesión, incluyendo la inicialización de los componentes de
+     * la interfaz gráfica y los manejadores de eventos para los botones y el combo box.
+     * </p>
+     */
     public Login(){
         super("Bienvenida");
         setSize(600,500);
@@ -32,6 +48,7 @@ public class Login extends JFrame {
         setContentPane(JPanel_Login);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+        // Configura el comportamiento del JComboBox para mostrar el panel correspondiente según el tipo de usuario seleccionado
         comboUsu.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -72,6 +89,7 @@ public class Login extends JFrame {
             }
         });
 
+        // Configura el comportamiento del botón de ingreso para realizar la autenticación
         ingresarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -82,6 +100,8 @@ public class Login extends JFrame {
                 }
             }
         });
+
+        // Configura el comportamiento del botón de registro para abrir la ventana de registro
         registreseButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -92,6 +112,16 @@ public class Login extends JFrame {
         });
     }
 
+    /**
+     * Maneja el proceso de inicio de sesión verificando las credenciales del usuario.
+     * <p>
+     * Este método se conecta a la base de datos, verifica las credenciales proporcionadas y, si son correctas,
+     * dirige al usuario a la ventana correspondiente (Administrador, Profesor o Estudiante). También maneja
+     * los casos en que las credenciales son incorrectas.
+     * </p>
+     *
+     * @throws SQLException Si ocurre un error al conectar o consultar la base de datos.
+     */
     public void iniciar() throws SQLException {
         String eleccion = (String) comboUsu.getSelectedItem(); // Tipo de usuario seleccionado en JComboBox
         Connection conectar = conexion();
@@ -164,6 +194,16 @@ public class Login extends JFrame {
         conectar.close();
     }
 
+    /**
+     * Establece la conexión con la base de datos.
+     * <p>
+     * Este método utiliza los detalles de la conexión (URL, usuario y contraseña) para conectarse a la base de datos
+     * MySQL que almacena la información de los usuarios.
+     * </p>
+     *
+     * @return La conexión establecida con la base de datos.
+     * @throws SQLException Si ocurre un error al conectar a la base de datos.
+     */
     public Connection conexion() throws SQLException {
         String url = "jdbc:mysql://bwhrnrxq2kqlsgfno7nj-mysql.services.clever-cloud.com:3306/bwhrnrxq2kqlsgfno7nj";
         String user = "uptlyedjy2kfhb4h";

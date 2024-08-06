@@ -9,6 +9,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.*;
 
+/**
+ * La clase Ver_Disponibil permite a los usuarios ver y gestionar sus reservas de aulas y laboratorios.
+ * Extiende JFrame para crear una interfaz gráfica de usuario.
+ */
 public class Ver_Disponibil extends JFrame {
     private JPanel JPanel_MisReservas;
     private JPanel MisReservas;
@@ -31,8 +35,12 @@ public class Ver_Disponibil extends JFrame {
 
     private int usuarioId;
 
+    /**
+     * Constructor de la clase Ver_Disponibil.
+     *
+     * @param usuarioId ID del usuario que realiza las acciones.
+     */
     public Ver_Disponibil(int usuarioId) {
-
         this.usuarioId = usuarioId;
 
         setExtendedState(JFrame.MAXIMIZED_BOTH);
@@ -40,7 +48,7 @@ public class Ver_Disponibil extends JFrame {
         setContentPane(JPanel_MisReservas);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        regresarButton.setSize(20,20);
+        regresarButton.setSize(20, 20);
         ImageIcon icon = new ImageIcon("img/flechaAtras.png");
         Image img = icon.getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT);
         regresarButton.setIcon(new ImageIcon(img));
@@ -86,9 +94,13 @@ public class Ver_Disponibil extends JFrame {
                 }
             }
         });
-
     }
 
+    /**
+     * Carga los registros de reservas del usuario en la tabla.
+     *
+     * @throws SQLException Si ocurre un error al cargar los registros.
+     */
     public void cargarRegistros() throws SQLException {
         Connection conectar = conexionLocal();
         String sql = "SELECT * FROM reservas WHERE usuario_id = ?";
@@ -101,12 +113,12 @@ public class Ver_Disponibil extends JFrame {
 
         while (rs.next()) {
             model.addRow(new Object[]{
-                    rs.getString("id"),
-                    rs.getString("aula_lab_id"),
-                    rs.getString("usuario_id"),
-                    rs.getString("fecha_reserva"),
-                    rs.getString("hora_inicio"),
-                    rs.getString("hora_fin"),
+                    rs.getInt("id"),
+                    rs.getInt("aula_lab_id"),
+                    rs.getInt("usuario_id"),
+                    rs.getDate("fecha_reserva"),
+                    rs.getTime("hora_inicio"),
+                    rs.getTime("hora_fin"),
                     rs.getString("estado")
             });
         }
@@ -115,6 +127,11 @@ public class Ver_Disponibil extends JFrame {
         conectar.close();
     }
 
+    /**
+     * Muestra los detalles del aula/laboratorio seleccionado.
+     *
+     * @throws SQLException Si ocurre un error al obtener los detalles.
+     */
     public void verDetalles() throws SQLException {
         String id = txtID.getText();
         if (id.isEmpty()) {
@@ -125,7 +142,7 @@ public class Ver_Disponibil extends JFrame {
         Connection conectar = conexionLocal();
         String sql = "SELECT * FROM aulas_laboratorios WHERE Id = ?";
         PreparedStatement st = conectar.prepareStatement(sql);
-        st.setString(1, id);
+        st.setInt(1, Integer.parseInt(id));
         ResultSet rs = st.executeQuery();
 
         if (rs.next()) {
@@ -139,7 +156,7 @@ public class Ver_Disponibil extends JFrame {
             // Habilitar el botón de actualización
             verDetallesButton.setEnabled(true);
         } else {
-            JOptionPane.showMessageDialog(null, "NO SE ENCONTRO NINGUN REGISTRO CON EL ID PROPORCIONADO");
+            JOptionPane.showMessageDialog(null, "No se encontró ningún registro con el ID proporcionado");
             // Deshabilitar el botón de actualización si no se encontraron datos
             verDetallesButton.setEnabled(false);
         }
@@ -149,27 +166,45 @@ public class Ver_Disponibil extends JFrame {
         conectar.close();
     }
 
+    /**
+     * Cancela una reserva y actualiza el estado del aula/laboratorio.
+     *
+     * @throws SQLException Si ocurre un error al cancelar la reserva.
+     */
     public void cancelar() throws SQLException {
         String idReserva = txtIdDelete.getText();
 
+        if (idReserva.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Ingrese el ID de la reserva para cancelar.");
+            return;
+        }
+
         Connection conectar = conexionLocal();
-        String sql = "SELECT aula_lab_id FROM reservas WHERE id = ?";
-        PreparedStatement stSelect = conectar.prepareStatement(sql);
+        String sqlSelect = "SELECT aula_lab_id, usuario_id FROM reservas WHERE id = ?";
+        PreparedStatement stSelect = conectar.prepareStatement(sqlSelect);
         stSelect.setString(1, idReserva);
         ResultSet rs = stSelect.executeQuery();
 
         if (rs.next()) {
             int aulaLabId = rs.getInt("aula_lab_id");
+            int usuarioIdReserva = rs.getInt("usuario_id");
 
-            // Eliminar la reserva
+            // Verificar si la reserva pertenece al usuario actual
+            if (usuarioIdReserva != this.usuarioId) {
+                JOptionPane.showMessageDialog(null, "No puede cancelar reservas de otros usuarios.");
+                rs.close();
+                stSelect.close();
+                conectar.close();
+                return;
+            }
+
             String sqlDelete = "DELETE FROM reservas WHERE id = ?";
             PreparedStatement stDelete = conectar.prepareStatement(sqlDelete);
             stDelete.setString(1, idReserva);
             int rowsAffected = stDelete.executeUpdate();
 
             if (rowsAffected > 0) {
-                // Actualizar el estado del aula/laboratorio a "Disponible"
-                String sqlUpdate = "UPDATE aulas_laboratorios SET Estado = 'Disponible' WHERE Id = ?";
+                String sqlUpdate = "UPDATE aulas_laboratorios SET Estado = 'Disponible' WHERE Id = ? AND Tipo = 'Aula'";
                 PreparedStatement stUpdate = conectar.prepareStatement(sqlUpdate);
                 stUpdate.setInt(1, aulaLabId);
                 stUpdate.executeUpdate();
@@ -181,15 +216,22 @@ public class Ver_Disponibil extends JFrame {
             }
 
             stDelete.close();
-
         } else {
             JOptionPane.showMessageDialog(null, "No se encontró ninguna reserva con el ID proporcionado.");
         }
 
+        rs.close();
         stSelect.close();
         conectar.close();
     }
 
+    /**
+     * Actualiza el estado de un aula/laboratorio.
+     *
+     * @param aulaLabId   ID del aula/laboratorio.
+     * @param nuevoEstado Nuevo estado del aula/laboratorio.
+     * @throws SQLException Si ocurre un error al actualizar el estado.
+     */
     public void actualizarEstadoAulaLab(int aulaLabId, String nuevoEstado) throws SQLException {
         Connection conectar = conexionLocal();
         String sql = "UPDATE aulas_laboratorios SET Estado = ? WHERE Id = ?";
@@ -201,6 +243,12 @@ public class Ver_Disponibil extends JFrame {
         conectar.close();
     }
 
+    /**
+     * Establece la conexión con la base de datos local.
+     *
+     * @return Conexión a la base de datos local.
+     * @throws SQLException Si ocurre un error al conectar.
+     */
     public Connection conexionLocal() throws SQLException {
         String url = "jdbc:mysql://localhost:3306/miaulaesfot";
         String user = "root";
@@ -208,11 +256,16 @@ public class Ver_Disponibil extends JFrame {
         return DriverManager.getConnection(url, user, password);
     }
 
+    /**
+     * Establece la conexión con la base de datos en la nube.
+     *
+     * @return Conexión a la base de datos en la nube.
+     * @throws SQLException Si ocurre un error al conectar.
+     */
     public Connection conexionNube() throws SQLException {
         String url = "jdbc:mysql://bwhrnrxq2kqlsgfno7nj-mysql.services.clever-cloud.com:3306/bwhrnrxq2kqlsgfno7nj";
         String user = "uptlyedjy2kfhb4h";
         String password = "2bmWngRsgFBMmwDLpwPV";
         return DriverManager.getConnection(url, user, password);
     }
-
 }

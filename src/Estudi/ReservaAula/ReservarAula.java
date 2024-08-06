@@ -14,11 +14,14 @@ import java.sql.*;
 import java.util.Calendar;
 import java.util.Date;
 
+/**
+ * Clase ReservarAula permite a los usuarios reservar aulas disponibles.
+ */
 public class ReservarAula extends JFrame {
     private JPanel JPanelAul_Lab;
     private JPanel JPanel_Reserva;
     private JPanel JPanel_Form;
-    private JComboBox ComboTipo;
+    private JComboBox<String> ComboTipo;
     private JDateChooser DateReserva;
     private JSpinner SpinHInicio;
     private JSpinner SpinHFin;
@@ -31,12 +34,15 @@ public class ReservarAula extends JFrame {
 
     private int usuarioId;
 
+    /**
+     * Inicializa los componentes personalizados de la interfaz gráfica.
+     */
     private void createUIComponents() {
         DateReserva = new JDateChooser();
         DateReserva.setDateFormatString("yyyy-MM-dd");
 
         // Inicialización de JSpinner para horas de inicio
-        SpinnerDateModel modelHInicio = new SpinnerDateModel(new Date(), null, null, java.util.Calendar.HOUR_OF_DAY);
+        SpinnerDateModel modelHInicio = new SpinnerDateModel(new Date(), null, null, Calendar.HOUR_OF_DAY);
         SpinHInicio = new JSpinner(modelHInicio);
         JSpinner.DateEditor editorHInicio = new JSpinner.DateEditor(SpinHInicio, "HH:mm");
         SpinHInicio.setEditor(editorHInicio);
@@ -48,7 +54,11 @@ public class ReservarAula extends JFrame {
         SpinHFin.setEditor(editorFin);
     }
 
-    public ReservarAula(int usuarioId){
+    /**
+     * Constructor de la clase ReservarAula.
+     * @param usuarioId ID del usuario que realiza la reserva.
+     */
+    public ReservarAula(int usuarioId) {
         this.usuarioId = usuarioId;
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         setLocationRelativeTo(null);
@@ -77,7 +87,7 @@ public class ReservarAula extends JFrame {
             throw new RuntimeException(e);
         }
 
-        regresarButton.setSize(20,20);
+        regresarButton.setSize(20, 20);
         ImageIcon icon = new ImageIcon("img/flechaAtras.png");
         Image img = icon.getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT);
         regresarButton.setIcon(new ImageIcon(img));
@@ -91,6 +101,11 @@ public class ReservarAula extends JFrame {
             }
         });
     }
+
+    /**
+     * Confirma la reserva de un aula.
+     * @throws SQLException Si ocurre un error al acceder a la base de datos.
+     */
     public void confReserva() throws SQLException {
         JTextField usuarioEmailField = new JTextField();
         JPasswordField contraseñaField = new JPasswordField();
@@ -116,11 +131,16 @@ public class ReservarAula extends JFrame {
             }
 
             // Si la verificación del usuario es exitosa, llamar al método para ingresar datos de la reserva
-            ingresrDatosReserva(email);
+            ingresarDatosReserva(email);
         }
     }
 
-    public void ingresrDatosReserva(String email) throws SQLException {
+    /**
+     * Ingresa los datos de la reserva en la base de datos.
+     * @param email Correo del usuario que realiza la reserva.
+     * @throws SQLException Si ocurre un error al acceder a la base de datos.
+     */
+    public void ingresarDatosReserva(String email) throws SQLException {
         // Obtener el ID del usuario
         int usuarioId = obtenerIdUsuario(email);
         if (usuarioId == -1) {
@@ -165,6 +185,13 @@ public class ReservarAula extends JFrame {
         JOptionPane.showMessageDialog(null, "Reserva realizada con éxito.");
     }
 
+    /**
+     * Valida las credenciales del usuario.
+     * @param email Correo del usuario.
+     * @param contraseña Contraseña del usuario.
+     * @return true si las credenciales son válidas, false en caso contrario.
+     * @throws SQLException Si ocurre un error al acceder a la base de datos.
+     */
     public boolean validarUsuario(String email, String contraseña) throws SQLException {
         Connection conexionNube = conexionNube();
         String sql = "SELECT contraseña FROM usuarios WHERE email = ?";
@@ -185,6 +212,12 @@ public class ReservarAula extends JFrame {
         }
     }
 
+    /**
+     * Obtiene el ID del usuario basado en su correo.
+     * @param email Correo del usuario.
+     * @return El ID del usuario, o -1 si no se encuentra.
+     * @throws SQLException Si ocurre un error al acceder a la base de datos.
+     */
     public int obtenerIdUsuario(String email) throws SQLException {
         Connection conexionNube = conexionNube();
         String sql = "SELECT id FROM usuarios WHERE email = ?";
@@ -205,6 +238,12 @@ public class ReservarAula extends JFrame {
         }
     }
 
+    /**
+     * Verifica si un aula está disponible.
+     * @param aulaLabId ID del aula/laboratorio.
+     * @return true si el aula está disponible, false en caso contrario.
+     * @throws SQLException Si ocurre un error al acceder a la base de datos.
+     */
     public boolean verificarDisponibilidad(int aulaLabId) throws SQLException {
         Connection conectar = conexionLocal();
         String sql = "SELECT Estado FROM aulas_laboratorios WHERE Id = ? AND Tipo = 'Aula'";
@@ -225,6 +264,10 @@ public class ReservarAula extends JFrame {
         }
     }
 
+    /**
+     * Carga los registros de aulas disponibles en la tabla.
+     * @throws SQLException Si ocurre un error al acceder a la base de datos.
+     */
     public void cargarRegistros() throws SQLException {
         Connection conectar = conexionLocal();
         String sql = "SELECT * FROM aulas_laboratorios WHERE Estado = 'Disponible' AND Tipo = 'Aula'";
@@ -251,6 +294,11 @@ public class ReservarAula extends JFrame {
         conectar.close();
     }
 
+    /**
+     * Establece la conexión a la base de datos en la nube.
+     * @return Conexión a la base de datos.
+     * @throws SQLException Si ocurre un error al conectar a la base de datos.
+     */
     public Connection conexionNube() throws SQLException {
         String url = "jdbc:mysql://bwhrnrxq2kqlsgfno7nj-mysql.services.clever-cloud.com:3306/bwhrnrxq2kqlsgfno7nj";
         String user = "uptlyedjy2kfhb4h";
@@ -258,6 +306,11 @@ public class ReservarAula extends JFrame {
         return DriverManager.getConnection(url, user, password);
     }
 
+    /**
+     * Establece la conexión a la base de datos local.
+     * @return Conexión a la base de datos.
+     * @throws SQLException Si ocurre un error al conectar a la base de datos.
+     */
     public Connection conexionLocal() throws SQLException {
         String url = "jdbc:mysql://localhost:3306/miaulaesfot";
         String user = "root";

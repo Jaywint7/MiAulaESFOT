@@ -9,6 +9,9 @@ import java.sql.*;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Clase que gestiona las reservas de aulas y laboratorios.
+ */
 public class GestionReservas extends JFrame {
 
     private JPanel JPanel_Historial;
@@ -18,7 +21,11 @@ public class GestionReservas extends JFrame {
     private JTextField txtConfReserv;
     private JButton confirmarbutton;
 
-    public GestionReservas(){
+    /**
+     * Constructor de la clase GestionReservas.
+     * Configura la interfaz gráfica y añade los listeners a los botones.
+     */
+    public GestionReservas() {
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         setLocationRelativeTo(null);
         setContentPane(JPanel_Historial);
@@ -37,7 +44,7 @@ public class GestionReservas extends JFrame {
             throw new RuntimeException(e);
         }
 
-        regresarButton.setSize(20,20);
+        regresarButton.setSize(20, 20);
         ImageIcon icon = new ImageIcon("img/flechaAtras.png");
         Image img = icon.getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT);
         regresarButton.setIcon(new ImageIcon(img));
@@ -50,6 +57,7 @@ public class GestionReservas extends JFrame {
                 dispose();
             }
         });
+
         confirmarbutton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -62,7 +70,11 @@ public class GestionReservas extends JFrame {
         });
     }
 
-    public void aprobarReserva() throws SQLException{
+    /**
+     * Aprueba una reserva actualizando su estado en la base de datos.
+     * @throws SQLException Si ocurre un error al acceder a la base de datos.
+     */
+    public void aprobarReserva() throws SQLException {
         String idReserva = txtConfReserv.getText().trim();
         if (idReserva.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Ingrese el ID de la reserva para aprobar.");
@@ -70,7 +82,6 @@ public class GestionReservas extends JFrame {
         }
 
         int idReserv;
-
         try {
             idReserv = Integer.parseInt(idReserva);
         } catch (NumberFormatException e) {
@@ -78,7 +89,6 @@ public class GestionReservas extends JFrame {
             return;
         }
 
-        // Conectar a la base de datos local
         Connection conectar = conexionLocal();
         String sqlUpdate = "UPDATE reservas SET estado = 'Aprobado' WHERE id = ?";
         PreparedStatement stUpdate = conectar.prepareStatement(sqlUpdate);
@@ -90,12 +100,17 @@ public class GestionReservas extends JFrame {
 
         if (filasAfectadas > 0) {
             JOptionPane.showMessageDialog(null, "Reserva aprobada con éxito.");
-            cargarRegistrosCombinados(); // Actualizar la tabla para reflejar los cambios
+            cargarRegistrosCombinados();
         } else {
             JOptionPane.showMessageDialog(null, "No se encontró una reserva con el ID proporcionado.");
         }
     }
 
+    /**
+     * Carga los datos de los usuarios desde la base de datos en la nube.
+     * @return Un mapa con los datos de los usuarios.
+     * @throws SQLException Si ocurre un error al acceder a la base de datos.
+     */
     public Map<Integer, String[]> cargarUsuariosNube() throws SQLException {
         Connection con = conexionNube();
         String query = "SELECT id, nombre, apellido, tipo_usuario FROM usuarios";
@@ -123,16 +138,17 @@ public class GestionReservas extends JFrame {
         return usuariosMap;
     }
 
+    /**
+     * Carga los registros de reservas y combina la información de las tablas locales y de la nube.
+     */
     public void cargarRegistrosCombinados() {
         Connection conLocal = null;
         Statement stmtLocal = null;
         ResultSet rsLocal = null;
 
         try {
-            // Cargar usuarios desde la nube
             Map<Integer, String[]> usuariosMap = cargarUsuariosNube();
 
-            // Conectar a la base de datos local
             conLocal = conexionLocal();
             String queryLocal = "SELECT r.id AS ReservaID, " +
                     "       r.aula_lab_id AS AulaLabID, " +
@@ -165,18 +181,16 @@ public class GestionReservas extends JFrame {
                 String carrera = rsLocal.getString("Carrera");
                 String estado = rsLocal.getString("Estado");
 
-                // Obtener los datos del usuario de la base de datos en la nube
                 String[] usuarioData = usuariosMap.get(usuarioID);
                 String nombreUsuario = usuarioData != null ? usuarioData[0] : "Desconocido";
                 String apellidoUsuario = usuarioData != null ? usuarioData[1] : "Desconocido";
 
-                // Reemplazar el estado "Pendiente" por "Aprobado"
                 String estadoMostrar = "Pendiente".equals(estado) ? "Aprobado" : estado;
 
                 model.addRow(new Object[]{reservaID, aulaLabID, usuarioID, fechaReserva, horaInicio, horaFin, nombreUsuario, apellidoUsuario, carrera, estadoMostrar});
             }
         } catch (SQLException e) {
-            e.printStackTrace(); // O maneja el error de manera adecuada
+            e.printStackTrace();
         } finally {
             try {
                 if (rsLocal != null) rsLocal.close();
@@ -188,6 +202,11 @@ public class GestionReservas extends JFrame {
         }
     }
 
+    /**
+     * Establece la conexión con la base de datos en la nube.
+     * @return La conexión con la base de datos.
+     * @throws SQLException Si ocurre un error al conectar con la base de datos.
+     */
     public Connection conexionNube() throws SQLException {
         String url = "jdbc:mysql://bwhrnrxq2kqlsgfno7nj-mysql.services.clever-cloud.com:3306/bwhrnrxq2kqlsgfno7nj";
         String user = "uptlyedjy2kfhb4h";
@@ -195,6 +214,11 @@ public class GestionReservas extends JFrame {
         return DriverManager.getConnection(url, user, password);
     }
 
+    /**
+     * Establece la conexión con la base de datos local.
+     * @return La conexión con la base de datos.
+     * @throws SQLException Si ocurre un error al conectar con la base de datos.
+     */
     public Connection conexionLocal() throws SQLException {
         String url = "jdbc:mysql://localhost:3306/miaulaesfot";
         String user = "root";

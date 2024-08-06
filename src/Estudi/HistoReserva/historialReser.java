@@ -12,6 +12,9 @@ import java.sql.*;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * La clase historialReser muestra el historial de reservas de aulas y laboratorios para un usuario específico.
+ */
 public class historialReser extends JFrame {
     private JPanel JPanel_Historial;
     private JScrollPane ScrollUsuario;
@@ -21,7 +24,11 @@ public class historialReser extends JFrame {
 
     private int usuarioId;
 
-    public historialReser(int usuarioId){
+    /**
+     * Constructor de la clase historialReser.
+     * @param usuarioId ID del usuario para el cual se mostrará el historial de reservas.
+     */
+    public historialReser(int usuarioId) {
         this.usuarioId = usuarioId;
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         setLocationRelativeTo(null);
@@ -37,10 +44,11 @@ public class historialReser extends JFrame {
         try {
             cargarUsuariosNube();
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Error al cargar usuarios desde la nube.", "Error", JOptionPane.ERROR_MESSAGE);
         }
 
-        regresarButton.setSize(20,20);
+        regresarButton.setSize(20, 20);
         ImageIcon icon = new ImageIcon("img/flechaAtras.png");
         Image img = icon.getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT);
         regresarButton.setIcon(new ImageIcon(img));
@@ -55,6 +63,11 @@ public class historialReser extends JFrame {
         });
     }
 
+    /**
+     * Carga los usuarios desde la base de datos en la nube.
+     * @return Un mapa con los datos de los usuarios.
+     * @throws SQLException Si ocurre un error al acceder a la base de datos.
+     */
     public Map<Integer, String[]> cargarUsuariosNube() throws SQLException {
         Connection con = conexionNube();
         String query = "SELECT id, nombre, apellido, tipo_usuario FROM usuarios";
@@ -82,6 +95,9 @@ public class historialReser extends JFrame {
         return usuariosMap;
     }
 
+    /**
+     * Carga los registros combinados desde las bases de datos local y en la nube.
+     */
     public void cargarRegistrosCombinados() {
         Connection conLocal = null;
         Statement stmtLocal = null;
@@ -131,7 +147,8 @@ public class historialReser extends JFrame {
                 model.addRow(new Object[]{reservaID, aulaLabID, usuarioID, fechaReserva, horaInicio, horaFin, nombreUsuario, apellidoUsuario, carrera});
             }
         } catch (SQLException e) {
-            e.printStackTrace(); // O maneja el error de manera adecuada
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Error al cargar registros combinados.", "Error", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
                 if (rsLocal != null) rsLocal.close();
@@ -143,6 +160,11 @@ public class historialReser extends JFrame {
         }
     }
 
+    /**
+     * Establece la conexión con la base de datos en la nube.
+     * @return La conexión con la base de datos.
+     * @throws SQLException Si ocurre un error al conectarse a la base de datos.
+     */
     public Connection conexionNube() throws SQLException {
         String url = "jdbc:mysql://bwhrnrxq2kqlsgfno7nj-mysql.services.clever-cloud.com:3306/bwhrnrxq2kqlsgfno7nj";
         String user = "uptlyedjy2kfhb4h";
@@ -150,6 +172,11 @@ public class historialReser extends JFrame {
         return DriverManager.getConnection(url, user, password);
     }
 
+    /**
+     * Establece la conexión con la base de datos local.
+     * @return La conexión con la base de datos.
+     * @throws SQLException Si ocurre un error al conectarse a la base de datos.
+     */
     public Connection conexionLocal() throws SQLException {
         String url = "jdbc:mysql://localhost:3306/miaulaesfot";
         String user = "root";
