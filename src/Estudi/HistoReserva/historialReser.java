@@ -29,6 +29,7 @@ public class historialReser extends JFrame {
      * @param usuarioId ID del usuario para el cual se mostrará el historial de reservas.
      */
     public historialReser(int usuarioId) {
+        super("Historial de Reservas");
         this.usuarioId = usuarioId;
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         setLocationRelativeTo(null);

@@ -20,6 +20,7 @@ public class Historial extends JFrame {
     private int usuarioId;
 
     public Historial(int usuarioId){
+        super("Historial de Reservas");
         this.usuarioId = usuarioId;
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         setLocationRelativeTo(null);

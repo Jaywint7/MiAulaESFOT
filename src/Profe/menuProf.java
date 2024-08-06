@@ -37,6 +37,7 @@ public class menuProf extends JFrame {
      * @param usuarioId El ID del usuario, que se utiliza para identificar al profesor en las acciones posteriores.
      */
     public menuProf(int usuarioId) {
+        super("Menú Profesor");
         this.usuarioId = usuarioId;
         setSize(600, 500);
         setLocationRelativeTo(null);

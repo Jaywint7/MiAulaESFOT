@@ -41,6 +41,7 @@ public class Ver_Disponibil extends JFrame {
      * @param usuarioId ID del usuario que realiza las acciones.
      */
     public Ver_Disponibil(int usuarioId) {
+        super("Ver Mis Reservas - Profesor");
         this.usuarioId = usuarioId;
 
         setExtendedState(JFrame.MAXIMIZED_BOTH);

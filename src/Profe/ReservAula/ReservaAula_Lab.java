@@ -59,6 +59,7 @@ public class ReservaAula_Lab extends JFrame {
      * @param usuarioId ID del usuario que realiza la reserva.
      */
     public ReservaAula_Lab(int usuarioId) {
+        super("Reserva de Aulas y Laboratorios - Profesor");
         this.usuarioId = usuarioId;
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         setLocationRelativeTo(null);

@@ -47,7 +47,7 @@ public class GestionAul_Lab extends JFrame {
      * Configura la interfaz gráfica, inicializa los componentes y establece los eventos de los botones.
      */
     public GestionAul_Lab(){
-        super("Gestion de Usuarios");
+        super("Gestion de Aulas y Laboratorios");
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         setLocationRelativeTo(null);
         setContentPane(JPanel_GestAulLab);

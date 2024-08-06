@@ -38,6 +38,7 @@ public class menuEstudi extends JFrame {
      * @param usuarioId El ID del usuario, que se utiliza para identificar al estudiante en las acciones posteriores.
      */
     public menuEstudi(int usuarioId) {
+        super("Menú Estudiante");
         this.usuarioId = usuarioId;
         setSize(600, 500);
         setLocationRelativeTo(null);

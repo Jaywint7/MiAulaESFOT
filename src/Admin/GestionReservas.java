@@ -26,6 +26,7 @@ public class GestionReservas extends JFrame {
      * Configura la interfaz gráfica y añade los listeners a los botones.
      */
     public GestionReservas() {
+        super("Gestion de Reservas");
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         setLocationRelativeTo(null);
         setContentPane(JPanel_Historial);

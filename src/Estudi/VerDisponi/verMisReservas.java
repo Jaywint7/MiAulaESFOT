@@ -41,6 +41,7 @@ public class verMisReservas extends JFrame {
      * @param usuarioId ID del usuario que accede a sus reservas.
      */
     public verMisReservas(int usuarioId) {
+        super("Ver Mis Reservas - Estudiante");
         this.usuarioId = usuarioId;
 
         setExtendedState(JFrame.MAXIMIZED_BOTH);

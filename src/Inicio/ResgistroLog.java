@@ -38,7 +38,7 @@ public class ResgistroLog extends JFrame {
      * </p>
      */
     public ResgistroLog() {
-        super("Bienvenida");
+        super("Registro Login");
         setSize(600, 500);
         setLocationRelativeTo(null);
         setContentPane(JPanel_reg);
