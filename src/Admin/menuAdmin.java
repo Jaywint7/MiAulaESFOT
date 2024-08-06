@@ -10,7 +10,6 @@ public class menuAdmin extends JFrame{
     private JButton gestionDeUsuariosButton;
     private JButton gestionDeReservasButton;
     private JButton gestionDeAulasYButton;
-    private JButton gestionarAdministradoresButton;
     private JPanel JPanel_menuAdmin;
     private JButton flechabtn;
     private JButton button1;

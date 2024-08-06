@@ -17,8 +17,10 @@ public class Historial extends JFrame {
     private JScrollPane ScrollUsuario;
     private JTable tableHistorial;
     private JButton regresarButton;
+    private int usuarioId;
 
-    public Historial(){
+    public Historial(int usuarioId){
+        this.usuarioId = usuarioId;
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         setLocationRelativeTo(null);
         setContentPane(JPanel_Historial);
@@ -44,7 +46,7 @@ public class Historial extends JFrame {
         regresarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Profe.menuProf menu = new menuProf();
+                Profe.menuProf menu = new menuProf(usuarioId);
                 menu.setVisible(true);
                 dispose();
             }

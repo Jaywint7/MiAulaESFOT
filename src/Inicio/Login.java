@@ -119,53 +119,48 @@ public class Login extends JFrame {
             return;
         }
 
-        // Verificar tipo de usuario
         String sql = "SELECT * FROM usuarios WHERE email = ?";
-        PreparedStatement st = conectar.prepareStatement(sql);
-        st.setString(1, user);
-        ResultSet rs = st.executeQuery();
+        try (PreparedStatement st = conectar.prepareStatement(sql)) {
+            st.setString(1, user);
+            try (ResultSet rs = st.executeQuery()) {
+                if (rs.next()) {
+                    String contraAlma = rs.getString("contraseña");
+                    String tipoUsuario = rs.getString("tipo_usuario");
+                    int usuarioId = rs.getInt("id");
 
-        if (rs.next()) {
-            // Usuario encontrado
-            String contraAlma = rs.getString("contraseña");
-            String tipoUsuario = rs.getString("tipo_usuario");
-
-            // Comparar la contraseña ingresada con la almacenada en la base de datos
-            if (BCrypt.checkpw(pswd, contraAlma)) {
-
-                // Validar el tipo de usuario según la selección
-                switch (tipoUsuario) {
-                    case "Administrador":
-                        JOptionPane.showMessageDialog(null, "CREDENCIALES CORRECTAS - " + tipoUsuario);
-                        Admin.menuAdmin menuAd = new menuAdmin();
-                        menuAd.setVisible(true);
-                        dispose();
-                        break;
-                    case "Profesor":
-                        JOptionPane.showMessageDialog(null, "CREDENCIALES CORRECTAS - " + tipoUsuario);
-                        Profe.menuProf menuPr = new menuProf();
-                        menuPr.setVisible(true);
-                        dispose();
-                        break;
-                    case "Estudiante":
-                        JOptionPane.showMessageDialog(null, "CREDENCIALES CORRECTAS - " + tipoUsuario);
-                        Estudi.menuEstudi menuEst = new Estudi.menuEstudi();
-                        menuEst.setVisible(true);
-                        dispose();
-                        break;
-                    default:
-                        JOptionPane.showMessageDialog(null, "ERROR DE CREDENCIALES - Tipo de usuario incorrecto");
-                        break;
+                    if (BCrypt.checkpw(pswd, contraAlma)) {
+                        // Verificar que el tipo de usuario coincida con la selección
+                        if (eleccion.equals(tipoUsuario)) {
+                            switch (tipoUsuario) {
+                                case "Administrador":
+                                    JOptionPane.showMessageDialog(null, "CREDENCIALES CORRECTAS - " + tipoUsuario);
+                                    new menuAdmin().setVisible(true);
+                                    break;
+                                case "Profesor":
+                                    JOptionPane.showMessageDialog(null, "CREDENCIALES CORRECTAS - " + tipoUsuario);
+                                    new menuProf(usuarioId).setVisible(true);
+                                    break;
+                                case "Estudiante":
+                                    JOptionPane.showMessageDialog(null, "CREDENCIALES CORRECTAS - " + tipoUsuario);
+                                    new Estudi.menuEstudi(usuarioId).setVisible(true);
+                                    break;
+                                default:
+                                    JOptionPane.showMessageDialog(null, "ERROR DE CREDENCIALES - Tipo de usuario incorrecto");
+                                    break;
+                            }
+                            dispose();
+                        } else {
+                            JOptionPane.showMessageDialog(null, "CREDENCIALES INCORRECTAS - Tipo de usuario no coincide");
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(null, "CREDENCIALES INCORRECTAS - Contraseña");
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "CREDENCIALES INCORRECTAS - Usuario no encontrado");
                 }
-            } else {
-                JOptionPane.showMessageDialog(null, "CREDENCIALES INCORRECTAS - Contraseña");
             }
-        } else {
-            JOptionPane.showMessageDialog(null, "CREDENCIALES INCORRECTAS - Usuario no encontrado");
         }
 
-        rs.close();
-        st.close();
         conectar.close();
     }
 

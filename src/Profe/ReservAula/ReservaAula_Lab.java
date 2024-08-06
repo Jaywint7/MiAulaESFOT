@@ -1,4 +1,4 @@
-package Profe.ReservAula_Lab;
+package Profe.ReservAula;
 
 import Profe.menuProf;
 import com.toedter.calendar.JDateChooser;
@@ -27,6 +27,8 @@ public class ReservaAula_Lab extends JFrame {
     private JButton regresarButton;
     private JTextField txtIdReserva;
 
+    private int usuarioId;
+
     private void createUIComponents() {
         DateReserva = new JDateChooser();
         DateReserva.setDateFormatString("yyyy-MM-dd");
@@ -44,7 +46,8 @@ public class ReservaAula_Lab extends JFrame {
         SpinHFin.setEditor(editorFin);
     }
 
-    public ReservaAula_Lab(){
+    public ReservaAula_Lab(int usuarioId){
+        this.usuarioId = usuarioId;
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         setLocationRelativeTo(null);
         setContentPane(JPanelAul_Lab);
@@ -80,7 +83,7 @@ public class ReservaAula_Lab extends JFrame {
         regresarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Profe.menuProf menu = new menuProf();
+                Profe.menuProf menu = new menuProf(usuarioId);
                 menu.setVisible(true);
                 dispose();
             }

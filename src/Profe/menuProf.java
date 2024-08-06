@@ -2,7 +2,8 @@ package Profe;
 
 import Inicio.Login;
 import Profe.HistorialReserv.Historial;
-import Profe.ReservAula_Lab.ReservaAula_Lab;
+import Profe.ReservAula.ReservaAula_Lab;
+import Profe.VerDisponibilidad.Ver_Disponibil;
 
 import javax.swing.*;
 import java.awt.*;
@@ -16,7 +17,11 @@ public class menuProf extends JFrame {
     private JButton resumenDeReservasRecientesButton;
     private JButton flechabtn;
     private JButton button1;
-    public menuProf() {
+
+    private int usuarioId;
+
+    public menuProf(int usuarioId) {
+        this.usuarioId = usuarioId;
         setSize(600,500);
         setLocationRelativeTo(null);
         setContentPane(JPanel_menuAdmin);
@@ -39,7 +44,7 @@ public class menuProf extends JFrame {
         resumenDeReservasRecientesButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Historial resumen = new Historial();
+                Historial resumen = new Historial(usuarioId);
                 resumen.setVisible(true);
                 dispose();
             }
@@ -48,14 +53,16 @@ public class menuProf extends JFrame {
         verReservasButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                Ver_Disponibil ver = new Ver_Disponibil(usuarioId);
+                ver.setVisible(true);
+                dispose();
             }
         });
 
         reservarAulasYLaboratoriosButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ReservaAula_Lab reserva = new ReservaAula_Lab();
+                ReservaAula_Lab reserva = new ReservaAula_Lab(usuarioId);
                 reserva.setVisible(true);
                 dispose();
             }

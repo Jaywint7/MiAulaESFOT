@@ -1,5 +1,6 @@
-package Profe.VerDisponibilidad;
+package Estudi.VerDisponi;
 
+import Estudi.menuEstudi;
 import Profe.menuProf;
 
 import javax.swing.*;
@@ -9,29 +10,30 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.*;
 
-public class Ver_Disponibil extends JFrame {
+public class verMisReservas extends JFrame {
     private JPanel JPanel_MisReservas;
     private JPanel MisReservas;
+    private JScrollPane tablaMisRegistros;
+    private JTable tablaMisReservas_Est;
     private JPanel Det_Canc;
-    private JTable tablaMisReservas;
     private JButton verDetallesButton;
     private JButton cancelarButton;
-    private JScrollPane tablaMisRegistros;
     private JPanel Detalles;
-    private JPanel Cancelar;
     private JTextField txtTipo;
     private JTextField txtNom;
     private JTextField txtCapacidad;
     private JTextField txtNumAuLab;
     private JTextField txtCarrera;
-    private JTextField txtID;
+    private JPanel Cancelar;
     private JTextField txtIdDelete;
+    private JTextField txtID;
     private JButton regresarButton;
     private JLabel lblUsuario;
+    private JPanel JPanel_VermisReservasEst;
 
     private int usuarioId;
 
-    public Ver_Disponibil(int usuarioId) {
+    public verMisReservas(int usuarioId){
 
         this.usuarioId = usuarioId;
 
@@ -45,7 +47,7 @@ public class Ver_Disponibil extends JFrame {
         Image img = icon.getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT);
         regresarButton.setIcon(new ImageIcon(img));
 
-        tablaMisReservas.setModel(new DefaultTableModel(
+        tablaMisReservas_Est.setModel(new DefaultTableModel(
                 new Object[][]{},
                 new String[]{"ID Reserva", "Aula/Lab ID", "Usuario ID", "Fecha de Reserva", "Hora de Inicio", "Hora de Fin", "Estado"}
         ));
@@ -59,7 +61,7 @@ public class Ver_Disponibil extends JFrame {
         regresarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Profe.menuProf menu = new menuProf(usuarioId);
+                Estudi.menuEstudi menu = new menuEstudi(usuarioId);
                 menu.setVisible(true);
                 dispose();
             }
@@ -91,12 +93,12 @@ public class Ver_Disponibil extends JFrame {
 
     public void cargarRegistros() throws SQLException {
         Connection conectar = conexionLocal();
-        String sql = "SELECT * FROM reservas WHERE usuario_id = ?";
+        String sql = "SELECT * FROM reservas WHERE usuario_id = ? AND aula_lab_id IN (SELECT Id FROM aulas_laboratorios WHERE Tipo = 'Aula') ";
 
         PreparedStatement st = conectar.prepareStatement(sql);
         st.setInt(1, usuarioId);
         ResultSet rs = st.executeQuery();
-        DefaultTableModel model = (DefaultTableModel) tablaMisReservas.getModel();
+        DefaultTableModel model = (DefaultTableModel) tablaMisReservas_Est.getModel();
         model.setRowCount(0); // Limpiar la tabla antes de agregar nuevos datos
 
         while (rs.next()) {
@@ -123,7 +125,7 @@ public class Ver_Disponibil extends JFrame {
         }
 
         Connection conectar = conexionLocal();
-        String sql = "SELECT * FROM aulas_laboratorios WHERE Id = ?";
+        String sql = "SELECT * FROM aulas_laboratorios WHERE Id = ? AND Tipo = 'Aula'";
         PreparedStatement st = conectar.prepareStatement(sql);
         st.setString(1, id);
         ResultSet rs = st.executeQuery();
@@ -169,7 +171,7 @@ public class Ver_Disponibil extends JFrame {
 
             if (rowsAffected > 0) {
                 // Actualizar el estado del aula/laboratorio a "Disponible"
-                String sqlUpdate = "UPDATE aulas_laboratorios SET Estado = 'Disponible' WHERE Id = ?";
+                String sqlUpdate = "UPDATE aulas_laboratorios SET Estado = 'Disponible' WHERE Id = ? AND Tipo = 'Aula'";
                 PreparedStatement stUpdate = conectar.prepareStatement(sqlUpdate);
                 stUpdate.setInt(1, aulaLabId);
                 stUpdate.executeUpdate();
@@ -192,7 +194,7 @@ public class Ver_Disponibil extends JFrame {
 
     public void actualizarEstadoAulaLab(int aulaLabId, String nuevoEstado) throws SQLException {
         Connection conectar = conexionLocal();
-        String sql = "UPDATE aulas_laboratorios SET Estado = ? WHERE Id = ?";
+        String sql = "UPDATE aulas_laboratorios SET Estado = ? WHERE Id = ? AND Tipo = 'Aula'";
         PreparedStatement st = conectar.prepareStatement(sql);
         st.setString(1, nuevoEstado);
         st.setInt(2, aulaLabId);
@@ -214,5 +216,4 @@ public class Ver_Disponibil extends JFrame {
         String password = "2bmWngRsgFBMmwDLpwPV";
         return DriverManager.getConnection(url, user, password);
     }
-
 }

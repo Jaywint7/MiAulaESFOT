@@ -1,4 +1,7 @@
-package Admin;
+package Estudi.HistoReserva;
+
+import Estudi.menuEstudi;
+import Profe.menuProf;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -9,28 +12,28 @@ import java.sql.*;
 import java.util.HashMap;
 import java.util.Map;
 
-public class GestionReservas extends JFrame {
-
+public class historialReser extends JFrame {
     private JPanel JPanel_Historial;
     private JScrollPane ScrollUsuario;
-    private JTable tableHistorial;
+    private JTable tableHistorial_Est;
     private JButton regresarButton;
-    private JTextField txtConfReserv;
-    private JButton confirmarbutton;
+    private JPanel JPanel_historialEst;
 
-    public GestionReservas(){
+    private int usuarioId;
+
+    public historialReser(int usuarioId){
+        this.usuarioId = usuarioId;
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         setLocationRelativeTo(null);
-        setContentPane(JPanel_Historial);
+        setContentPane(JPanel_historialEst);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        tableHistorial.setModel(new DefaultTableModel(
+        tableHistorial_Est.setModel(new DefaultTableModel(
                 new Object[][]{},
-                new String[]{"Id", "Aula/Lab ID", "Usuario ID", "Fecha de Reserva", "Hora Inicio", "Hora Fin", "Nombre Usuario", "Apellido Usuario", "Carrera", "Estado"}
+                new String[]{"Id", "Aula/Lab ID", "Usuario ID", "Fecha de Reserva", "Hora Inicio", "Hora Fin", "Nombre Usuario", "Apellido Usuario", "Carrera"}
         ));
 
         cargarRegistrosCombinados();
-
         try {
             cargarUsuariosNube();
         } catch (SQLException e) {
@@ -45,55 +48,11 @@ public class GestionReservas extends JFrame {
         regresarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Admin.menuAdmin menu = new menuAdmin();
+                Estudi.menuEstudi menu = new menuEstudi(usuarioId);
                 menu.setVisible(true);
                 dispose();
             }
         });
-        confirmarbutton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                try {
-                    aprobarReserva();
-                } catch (SQLException ex) {
-                    throw new RuntimeException(ex);
-                }
-            }
-        });
-    }
-
-    public void aprobarReserva() throws SQLException{
-        String idReserva = txtConfReserv.getText().trim();
-        if (idReserva.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Ingrese el ID de la reserva para aprobar.");
-            return;
-        }
-
-        int idReserv;
-
-        try {
-            idReserv = Integer.parseInt(idReserva);
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(null, "ID de reserva inválido.");
-            return;
-        }
-
-        // Conectar a la base de datos local
-        Connection conectar = conexionLocal();
-        String sqlUpdate = "UPDATE reservas SET estado = 'Aprobado' WHERE id = ?";
-        PreparedStatement stUpdate = conectar.prepareStatement(sqlUpdate);
-        stUpdate.setInt(1, idReserv);
-
-        int filasAfectadas = stUpdate.executeUpdate();
-        stUpdate.close();
-        conectar.close();
-
-        if (filasAfectadas > 0) {
-            JOptionPane.showMessageDialog(null, "Reserva aprobada con éxito.");
-            cargarRegistrosCombinados(); // Actualizar la tabla para reflejar los cambios
-        } else {
-            JOptionPane.showMessageDialog(null, "No se encontró una reserva con el ID proporcionado.");
-        }
     }
 
     public Map<Integer, String[]> cargarUsuariosNube() throws SQLException {
@@ -140,17 +99,17 @@ public class GestionReservas extends JFrame {
                     "       r.fecha_reserva AS FechaReserva, " +
                     "       r.hora_inicio AS HoraInicio, " +
                     "       r.hora_fin AS HoraFin, " +
-                    "       r.estado AS Estado, " +
                     "       al.Nombre AS NombreAulaLab, " +
                     "       al.Capacidad AS Capacidad, " +
                     "       al.Carrera AS Carrera " +
                     "FROM reservas r " +
-                    "JOIN aulas_laboratorios al ON r.aula_lab_id = al.Id";
+                    "JOIN aulas_laboratorios al ON r.aula_lab_id = al.Id " +
+                    "WHERE al.Tipo = 'Aula'"; // Filtrar solo aulas
 
             stmtLocal = conLocal.createStatement();
             rsLocal = stmtLocal.executeQuery(queryLocal);
 
-            DefaultTableModel model = (DefaultTableModel) tableHistorial.getModel();
+            DefaultTableModel model = (DefaultTableModel) tableHistorial_Est.getModel();
             model.setRowCount(0); // Limpiar filas existentes
 
             while (rsLocal.next()) {
@@ -163,17 +122,13 @@ public class GestionReservas extends JFrame {
                 String nombreAulaLab = rsLocal.getString("NombreAulaLab");
                 int capacidad = rsLocal.getInt("Capacidad");
                 String carrera = rsLocal.getString("Carrera");
-                String estado = rsLocal.getString("Estado");
 
                 // Obtener los datos del usuario de la base de datos en la nube
                 String[] usuarioData = usuariosMap.get(usuarioID);
                 String nombreUsuario = usuarioData != null ? usuarioData[0] : "Desconocido";
                 String apellidoUsuario = usuarioData != null ? usuarioData[1] : "Desconocido";
 
-                // Reemplazar el estado "Pendiente" por "Aprobado"
-                String estadoMostrar = "Pendiente".equals(estado) ? "Aprobado" : estado;
-
-                model.addRow(new Object[]{reservaID, aulaLabID, usuarioID, fechaReserva, horaInicio, horaFin, nombreUsuario, apellidoUsuario, carrera, estadoMostrar});
+                model.addRow(new Object[]{reservaID, aulaLabID, usuarioID, fechaReserva, horaInicio, horaFin, nombreUsuario, apellidoUsuario, carrera});
             }
         } catch (SQLException e) {
             e.printStackTrace(); // O maneja el error de manera adecuada

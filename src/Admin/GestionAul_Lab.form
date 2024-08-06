@@ -129,7 +129,7 @@
                 <properties>
                   <model>
                     <item value=""/>
-                    <item value="Disponible&#9;"/>
+                    <item value="Disponible"/>
                     <item value="Ocupado"/>
                   </model>
                 </properties>
@@ -149,7 +149,7 @@
                 <properties>
                   <model>
                     <item value=""/>
-                    <item value="Aula&#9;"/>
+                    <item value="Aula"/>
                     <item value="Laboratorio"/>
                   </model>
                 </properties>
@@ -162,8 +162,8 @@
                   <model>
                     <item value=""/>
                     <item value="Aguas y Saneamiento Ambiental"/>
-                    <item value="Desarrollo de Software&#9;"/>
-                    <item value="Electromenica "/>
+                    <item value="Desarrollo de Software"/>
+                    <item value="Electromenica"/>
                     <item value="Redes y Telecomunicaciones"/>
                   </model>
                 </properties>
@@ -286,7 +286,7 @@
                 <properties>
                   <model>
                     <item value=""/>
-                    <item value="Aula&#9;"/>
+                    <item value="Aula"/>
                     <item value="Laboratorio"/>
                   </model>
                 </properties>
@@ -299,8 +299,8 @@
                   <model>
                     <item value=""/>
                     <item value="Aguas y Saneamiento Ambiental"/>
-                    <item value="Desarrollo de Software&#9;"/>
-                    <item value="Electromenica "/>
+                    <item value="Desarrollo de Software"/>
+                    <item value="Electromenica"/>
                     <item value="Redes y Telecomunicaciones"/>
                   </model>
                 </properties>
@@ -461,8 +461,9 @@
           <scrollpane id="9cead" binding="JScroll_tabla">
             <constraints>
               <grid row="4" column="1" row-span="1" col-span="16" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false">
+                <minimum-size width="1300" height="200"/>
                 <preferred-size width="-1" height="100"/>
-                <maximum-size width="-1" height="100"/>
+                <maximum-size width="1300" height="200"/>
               </grid>
             </constraints>
             <properties/>
