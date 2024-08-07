@@ -1,6 +1,5 @@
 package Profe.HistorialReserv;
 
-import Admin.menuAdmin;
 import Profe.menuProf;
 
 import javax.swing.*;

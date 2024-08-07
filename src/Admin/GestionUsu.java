@@ -149,7 +149,7 @@ public class GestionUsu extends JFrame {
             return;
         }
 
-        String ContraHash = ManejarHash.hashPassword(contraseña);
+        String ContraHash = Admin.ManejarHash.hashPassword(contraseña);
 
         Connection conectar = conexion();
         String sql = "INSERT INTO usuarios(nombre, apellido, email, contraseña, tipo_usuario) VALUES (?, ?, ?, ?, ?)";

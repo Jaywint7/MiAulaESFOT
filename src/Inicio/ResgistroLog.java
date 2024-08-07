@@ -75,7 +75,7 @@ public class ResgistroLog extends JFrame {
         regresarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Login login = new Login();
+                Inicio.Login login = new Login();
                 login.setVisible(true);
                 dispose();
             }

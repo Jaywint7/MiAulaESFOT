@@ -1,0 +1,11 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="MiAulaESFOT:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/MiAulaESFOT_jar</output-path>
+    <root id="archive" name="MiAulaESFOT.jar">
+      <element id="module-output" name="MiAulaESFOT" />
+      <element id="extracted-dir" path="$USER_HOME$/OneDrive/Documentos/mysql-connector-j-9.0.0/mysql-connector-j-9.0.0/mysql-connector-j-9.0.0/mysql-connector-j-9.0.0.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/Downloads/jbcrypt-0.4.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/Downloads/jcalendar-1.4.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>

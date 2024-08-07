@@ -1,8 +1,5 @@
 package Inicio;
 
-import Admin.GestionReservas;
-import Estudi.menuEstudi;
-
 /**
  * La clase `Main` es el punto de entrada para la aplicación.
  * <p>

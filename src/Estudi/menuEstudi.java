@@ -55,7 +55,7 @@ public class menuEstudi extends JFrame {
         resumenDeReservasRecientesButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                historialReser historial = new historialReser(usuarioId);
+                Estudi.HistoReserva.historialReser historial = new historialReser(usuarioId);
                 historial.setVisible(true);
                 dispose();
             }
@@ -65,7 +65,7 @@ public class menuEstudi extends JFrame {
         verReservasButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                verMisReservas ver = new verMisReservas(usuarioId);
+                Estudi.VerDisponi.verMisReservas ver = new verMisReservas(usuarioId);
                 ver.setVisible(true);
                 dispose();
             }
@@ -75,7 +75,7 @@ public class menuEstudi extends JFrame {
         reservarAulasButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ReservarAula reserva = new ReservarAula(usuarioId);
+                Estudi.ReservaAula.ReservarAula reserva = new ReservarAula(usuarioId);
                 reserva.setVisible(true);
                 dispose();
             }
@@ -85,7 +85,7 @@ public class menuEstudi extends JFrame {
         flechabtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Login login  = new Login();
+                Inicio.Login login  = new Login();
                 login.setVisible(true);
                 dispose();
             }

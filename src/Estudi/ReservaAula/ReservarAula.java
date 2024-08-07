@@ -1,7 +1,6 @@
 package Estudi.ReservaAula;
 
 import Estudi.menuEstudi;
-import Profe.menuProf;
 import com.toedter.calendar.JDateChooser;
 import org.mindrot.jbcrypt.BCrypt;
 

@@ -6,7 +6,6 @@ import java.awt.event.ActionListener;
 import java.sql.*;
 
 import Admin.menuAdmin;
-import Estudi.menuEstudi;
 import Profe.menuProf;
 import org.mindrot.jbcrypt.BCrypt;
 
@@ -47,7 +46,6 @@ public class Login extends JFrame {
         setLocationRelativeTo(null);
         setContentPane(JPanel_Login);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
         // Configura el comportamiento del JComboBox para mostrar el panel correspondiente según el tipo de usuario seleccionado
         comboUsu.addActionListener(new ActionListener() {
             @Override
@@ -105,7 +103,7 @@ public class Login extends JFrame {
         registreseButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ResgistroLog registro = new ResgistroLog();
+                Inicio.ResgistroLog registro = new ResgistroLog();
                 registro.setVisible(true);
                 dispose();
             }

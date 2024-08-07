@@ -1,7 +1,6 @@
 package Estudi.VerDisponi;
 
 import Estudi.menuEstudi;
-import Profe.menuProf;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -248,18 +247,6 @@ public class verMisReservas extends JFrame {
         String url = "jdbc:mysql://localhost:3306/miaulaesfot";
         String user = "root";
         String password = "";
-        return DriverManager.getConnection(url, user, password);
-    }
-
-    /**
-     * Establece la conexión a la base de datos en la nube.
-     * @return Conexión a la base de datos.
-     * @throws SQLException Si ocurre un error al conectar a la base de datos.
-     */
-    public Connection conexionNube() throws SQLException {
-        String url = "jdbc:mysql://bwhrnrxq2kqlsgfno7nj-mysql.services.clever-cloud.com:3306/bwhrnrxq2kqlsgfno7nj";
-        String user = "uptlyedjy2kfhb4h";
-        String password = "2bmWngRsgFBMmwDLpwPV";
         return DriverManager.getConnection(url, user, password);
     }
 }

@@ -64,7 +64,7 @@ public class menuProf extends JFrame {
         resumenDeReservasRecientesButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Historial resumen = new Historial(usuarioId);
+                Profe.HistorialReserv.Historial resumen = new Historial(usuarioId);
                 resumen.setVisible(true);
                 dispose();
             }
@@ -74,7 +74,7 @@ public class menuProf extends JFrame {
         verReservasButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Ver_Disponibil ver = new Ver_Disponibil(usuarioId);
+                Profe.VerDisponibilidad.Ver_Disponibil ver = new Ver_Disponibil(usuarioId);
                 ver.setVisible(true);
                 dispose();
             }
@@ -84,7 +84,7 @@ public class menuProf extends JFrame {
         reservarAulasYLaboratoriosButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ReservaAula_Lab reserva = new ReservaAula_Lab(usuarioId);
+                Profe.ReservAula.ReservaAula_Lab reserva = new ReservaAula_Lab(usuarioId);
                 reserva.setVisible(true);
                 dispose();
             }

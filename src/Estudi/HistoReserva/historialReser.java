@@ -1,7 +1,6 @@
 package Estudi.HistoReserva;
 
 import Estudi.menuEstudi;
-import Profe.menuProf;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;

@@ -46,7 +46,7 @@ public class menuAdmin extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Abrir la ventana de gestión de usuarios y cerrar la ventana actual
-                GestionUsu gestion = new GestionUsu();
+                Admin.GestionUsu gestion = new GestionUsu();
                 gestion.setVisible(true);
                 dispose();
             }
@@ -56,7 +56,7 @@ public class menuAdmin extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Abrir la ventana de gestión de reservas y cerrar la ventana actual
-                GestionReservas reservas = new GestionReservas();
+                Admin.GestionReservas reservas = new GestionReservas();
                 reservas.setVisible(true);
                 dispose();
             }
@@ -66,7 +66,7 @@ public class menuAdmin extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Abrir la ventana de gestión de aulas y laboratorios y cerrar la ventana actual
-                GestionAul_Lab aulLab = new GestionAul_Lab();
+                Admin.GestionAul_Lab aulLab = new GestionAul_Lab();
                 aulLab.setVisible(true);
                 dispose();
             }

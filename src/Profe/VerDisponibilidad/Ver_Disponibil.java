@@ -227,24 +227,6 @@ public class Ver_Disponibil extends JFrame {
     }
 
     /**
-     * Actualiza el estado de un aula/laboratorio.
-     *
-     * @param aulaLabId   ID del aula/laboratorio.
-     * @param nuevoEstado Nuevo estado del aula/laboratorio.
-     * @throws SQLException Si ocurre un error al actualizar el estado.
-     */
-    public void actualizarEstadoAulaLab(int aulaLabId, String nuevoEstado) throws SQLException {
-        Connection conectar = conexionLocal();
-        String sql = "UPDATE aulas_laboratorios SET Estado = ? WHERE Id = ?";
-        PreparedStatement st = conectar.prepareStatement(sql);
-        st.setString(1, nuevoEstado);
-        st.setInt(2, aulaLabId);
-        st.executeUpdate();
-        st.close();
-        conectar.close();
-    }
-
-    /**
      * Establece la conexión con la base de datos local.
      *
      * @return Conexión a la base de datos local.
@@ -254,19 +236,6 @@ public class Ver_Disponibil extends JFrame {
         String url = "jdbc:mysql://localhost:3306/miaulaesfot";
         String user = "root";
         String password = "";
-        return DriverManager.getConnection(url, user, password);
-    }
-
-    /**
-     * Establece la conexión con la base de datos en la nube.
-     *
-     * @return Conexión a la base de datos en la nube.
-     * @throws SQLException Si ocurre un error al conectar.
-     */
-    public Connection conexionNube() throws SQLException {
-        String url = "jdbc:mysql://bwhrnrxq2kqlsgfno7nj-mysql.services.clever-cloud.com:3306/bwhrnrxq2kqlsgfno7nj";
-        String user = "uptlyedjy2kfhb4h";
-        String password = "2bmWngRsgFBMmwDLpwPV";
         return DriverManager.getConnection(url, user, password);
     }
 }
