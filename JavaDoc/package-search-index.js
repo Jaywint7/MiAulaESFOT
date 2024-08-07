@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"Admin"},{"l":"All Packages","u":"allpackages-index.html"},{"l":"Estudi"},{"l":"Estudi.HistoReserva"},{"l":"Estudi.ReservaAula"},{"l":"Estudi.VerDisponi"},{"l":"Inicio"},{"l":"Profe"},{"l":"Profe.HistorialReserv"},{"l":"Profe.ReservAula"},{"l":"Profe.VerDisponibilidad"}];updateSearchResults();
