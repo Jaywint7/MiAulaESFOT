@@ -10,7 +10,7 @@ CREATE TABLE Aulas_Laboratorios (
     Estado ENUM('Disponible', 'Ocupado', 'Mantenimiento') NOT NULL
 );
 CREATE TABLE reservas (
-    idR INT AUTO_INCREMENT PRIMARY KEY,
+    id INT AUTO_INCREMENT PRIMARY KEY,
     aula_lab_id INT NOT NULL,
     usuario_id INT NOT NULL,
     fecha_reserva DATE NOT NULL,
